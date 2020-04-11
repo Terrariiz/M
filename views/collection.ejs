@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>COLLECTION</h1>
+        </div>
+    </header>
+    <div class="row">
+        <% meme.forEach(function(im){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="img-thumbnail">
+                    <img src="<%= im.imgurl %>" class="img-fluid">
+                    <div class="caption">
+                        <h3><%= im.name %></h3>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,21 @@
+{
+  "name": "servertest",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ejs": "^3.0.2",
+    "lowercase-keys": "^1.0.1",
+    "isexe": "^2.0.0",
+    "media-typer": "^0.3.0",
+    "mime-db": "^1.43.0",
+    "mime": "^1.6.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
