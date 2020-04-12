@@ -1,6 +1,34 @@
 const express = require("express");
-let app = express();
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const app = express();
+
 app.set("view engine","ejs");
+app.use(bodyParser.urlencoded({extended: true}));
+
+mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
+
+let memberSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
+});
+
+let Member = mongoose.model("Member",memberSchema);
+
+// Member.create(
+//     {
+//         email: "Eartdy@mail.com",
+//         password: "123456"
+//     }, function(error, member){
+//         if(error){
+//             console.log("Error!");
+//         } else {
+//             console.log("Added");
+//             console.log(member)
+//         }
+//     }
+// );
 
 app.get("/",function(req,res){
     res.render("landing.ejs");
@@ -16,6 +44,21 @@ app.get("/signup",function(req,res){
 
 app.get("/collection", function(req,res){
     res.render("collection.ejs", {meme,meme});
+});
+
+app.post("/collection", function(req,res){
+    let n_name = req.body.name;
+    let n_email = req.body.email;
+    let n_password = req.body.password;
+    let n_user = { name: n_name, email: n_email, password: n_password };
+    Member.create(n_user, function(error, newUser){
+        if(error){
+            console.log("error");
+        } else {
+            console.log("Added new user.");
+        }
+    });
+    res.redirect("/collection");
 });
 
 let meme = [
