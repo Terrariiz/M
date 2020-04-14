@@ -30,23 +30,27 @@ let Member = mongoose.model("Member",memberSchema);
 //     }
 // );
 
-app.get("/",function(req,res){
+app.get("/memehub",function(req,res){
     res.render("landing.ejs");
 });
 
-app.get("/login",function(req,res){
+app.get("/memehub/add",function(req,res){
+    res.render("add.ejs");
+});
+
+app.get("/memehub/login",function(req,res){
     res.render("login.ejs");
 });
 
-app.get("/signup",function(req,res){
+app.get("/memehub/signup",function(req,res){
     res.render("signup.ejs");
 });
 
-app.get("/collection", function(req,res){
+app.get("/memehub/meme", function(req,res){
     res.render("collection.ejs", {meme,meme});
 });
 
-app.post("/collection", function(req,res){
+app.post("/memehub/meme", function(req,res){
     let n_name = req.body.name;
     let n_email = req.body.email;
     let n_password = req.body.password;
@@ -58,7 +62,7 @@ app.post("/collection", function(req,res){
             console.log("Added new user.");
         }
     });
-    res.redirect("/collection");
+    res.redirect("/memehub/meme");
 });
 
 let meme = [
