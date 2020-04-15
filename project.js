@@ -54,7 +54,7 @@ app.get("/memehub/feeds", function(req,res){
     res.render("feeds.ejs", {meme,meme});
 });
 
-app.post("/memehub/meme", function(req,res){
+app.post("/memehub/feeds", function(req,res){
     let n_name = req.body.name;
     let n_email = req.body.email;
     let n_password = req.body.password;
