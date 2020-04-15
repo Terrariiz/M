@@ -1,19 +1,31 @@
 <!DOCTYPE html>
     <head>
       <div class="w3-top">
-        <div class="w3-bar w3-red w3-card w3-left-align w3-large">
-          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-black" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <div class="w3-bar w3-amber w3-card w3-left-align w3-large">
+          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-black" href="javascript:void(0);" onclick="navClick()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
           <a href="/memehub" class="w3-bar-item w3-button w3-padding-large w3-black">MEMEHUB</a>
           <a href="/memehub/feeds" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">FEEDS</a>
           <a href="/memehub/add" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">ADD MEME</a>
-          <a href="/memehub/login" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" style="float:right; margin-right: 20px;">LOG IN</a>
+          <div class="w3-dropdown-hover w3-hide-small" style="float:right">
+            <a class="w3-padding-large w3-button" href="/memehub/profile">PROFILE <i class="fa fa-caret-down"></i></a>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4">
+              <a href="/memehub/login" class="w3-bar-item w3-button">LOG IN</a>
+              <a href="/memehub/signup" class="w3-bar-item w3-button">SIGN UP</a>
+            </div>
+          </div>
+          <div id="navDemo" class="w3-bar-block w3-amber w3-hide w3-hide-large w3-hide-medium w3-large">
+            <a href="/memehub/feeds" class="w3-bar-item w3-button w3-padding-large">FEEDS</a>
+            <a href="/memehub/add" class="w3-bar-item w3-button w3-padding-large">ADD MEME</a>
+            <div class="w3-dropdown-click">
+              <button onclick="ProfileClick()" class="w3-bar-item w3-button w3-padding-large">MORE...</button>
+              <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
+                <a href="/memehub/profile" class="w3-bar-item w3-button">PROFILE</a>
+                <a href="/memehub/login" class="w3-bar-item w3-button">LOG IN</a>
+                <a href="/memehub/signup" class="w3-bar-item w3-button">SIGN UP</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-          <a href="/memehub/feeds" class="w3-bar-item w3-button w3-padding-large">FEEDS</a>
-          <a href="/memehub/add" class="w3-bar-item w3-button w3-padding-large">ADD MEME</a>
-          <a href="/memehub/login" class="w3-bar-item w3-button w3-padding-large">LOG IN</a>
-        </div>
-      </div>
         <title>MEMEHUB</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +35,17 @@
     </head>
     <script>
       // Used to toggle the menu on small screens when clicking on the menu button
-      function myFunction() {
+      function navClick() {
         var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else { 
+          x.className = x.className.replace(" w3-show", "");
+        }
+      }
+      
+      function ProfileClick() {
+        var x = document.getElementById("Demo");
         if (x.className.indexOf("w3-show") == -1) {
           x.className += " w3-show";
         } else { 
