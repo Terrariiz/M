@@ -46,8 +46,12 @@ app.get("/memehub/signup",function(req,res){
     res.render("signup.ejs");
 });
 
-app.get("/memehub/meme", function(req,res){
-    res.render("collection.ejs", {meme,meme});
+app.get("/memehub/profile",function(req,res){
+    res.render("profile.ejs");
+});
+
+app.get("/memehub/feeds", function(req,res){
+    res.render("feeds.ejs", {meme,meme});
 });
 
 app.post("/memehub/meme", function(req,res){
@@ -62,7 +66,7 @@ app.post("/memehub/meme", function(req,res){
             console.log("Added new user.");
         }
     });
-    res.redirect("/memehub/meme");
+    res.redirect("/memehub/feeds");
 });
 
 let meme = [
