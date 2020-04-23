@@ -21,7 +21,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new passportLocal(User.authenicate()));
+passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -48,7 +48,7 @@ app.get("/memehub/signup",function(req,res){
 });
 
 app.post("/memehub/signup", function(req,res){
-    User.register(new User({username: req.body.name}), req.body.email, req.body.password, function(err, user){
+    User.register(new User({username: req.body.Name}), req.body.Email, req.body.Password, function(err, user){
         if(err){
             console.log(err);
             return res.render("signup");

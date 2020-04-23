@@ -1,2 +1,2 @@
-version 2.0 (CLASH VERSION)
-+passport, authen
+version 2.1
+can't redirect while sign up
