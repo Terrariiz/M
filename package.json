@@ -11,13 +11,17 @@
     "body-parser": "^1.19.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "isexe": "^2.0.0",
     "jquery": "^3.5.0",
     "lowercase-keys": "^1.0.1",
     "media-typer": "^0.3.0",
     "mime": "^1.6.0",
     "mime-db": "^1.43.0",
-    "mongoose": "^5.9.7"
+    "mongoose": "^5.9.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
   },
   "devDependencies": {},
   "description": ""

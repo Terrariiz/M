@@ -1,34 +1,29 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const   express = require("express"),
+        mongoose = require("mongoose"),
+        bodyParser = require("body-parser"),
+        passport = require("passport"),
+        passportLocal = require("passport-local"),
+        passportLocalMongoose = require("passport-local-mongoose"),
+        User = require("./models/user");
 const app = express();
+
+mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
+app.use(require("express-session")({
+    secret: "CSS227",
+    resave: false,
+    saveUninitialized: false
+}));
 
-let memberSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
-let Member = mongoose.model("Member",memberSchema);
-
-// Member.create(
-//     {
-//         email: "Eartdy@mail.com",
-//         password: "123456"
-//     }, function(error, member){
-//         if(error){
-//             console.log("Error!");
-//         } else {
-//             console.log("Added");
-//             console.log(member)
-//         }
-//     }
-// );
+passport.use(new passportLocal(User.authenicate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/memehub",function(req,res){
     res.render("landing.ejs");
@@ -42,8 +37,26 @@ app.get("/memehub/login",function(req,res){
     res.render("login.ejs");
 });
 
+app.post("/memehub/login", passport.authenticate("local",{
+        successRedirect: "/memehub",
+        failureRedirect: "login"
+    }),function(req, res){
+});
+
 app.get("/memehub/signup",function(req,res){
     res.render("signup.ejs");
+});
+
+app.post("/memehub/signup", function(req,res){
+    User.register(new User({username: req.body.name}), req.body.email, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("signup");
+        }
+        passport.authenicate("local")(req,res,function(){
+            res.redirect("/memehub/feeds");
+        });
+    });
 });
 
 app.get("/memehub/profile",function(req,res){
@@ -52,21 +65,6 @@ app.get("/memehub/profile",function(req,res){
 
 app.get("/memehub/feeds", function(req,res){
     res.render("feeds.ejs", {meme,meme});
-});
-
-app.post("/memehub/feeds", function(req,res){
-    let n_name = req.body.name;
-    let n_email = req.body.email;
-    let n_password = req.body.password;
-    let n_user = { name: n_name, email: n_email, password: n_password };
-    Member.create(n_user, function(error, newUser){
-        if(error){
-            console.log("error");
-        } else {
-            console.log("Added new user.");
-        }
-    });
-    res.redirect("/memehub/feeds");
 });
 
 let meme = [
