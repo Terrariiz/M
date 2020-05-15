@@ -1,2 +1,2 @@
-version 2.1
-can't redirect while sign up
+version 3
+Authen+
