@@ -4,27 +4,28 @@
         <div class="w3-bar w3-amber w3-card w3-left-align w3-large">
           <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-black" href="javascript:void(0);" onclick="navClick()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
           <a href="/memehub" class="w3-bar-item w3-button w3-padding-large w3-black">MEMEHUB</a>
-          <a href="/memehub/add" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">ADD MEME</a>
+          <a href="/memehub/meme/add" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">ADD MEME</a>
           <div class="w3-dropdown-hover w3-hide-small" style="float:right">
-            <a class="w3-padding-large w3-button" href="/memehub/profile">PROFILE <i class="fa fa-caret-down"></i></a>
-            <div class="w3-dropdown-content w3-bar-block w3-card-4">
-              <a href="/memehub/login" class="w3-bar-item w3-button">LOG IN</a>
-              <a href="/memehub/signup" class="w3-bar-item w3-button">SIGN UP</a>
-            </div>
-          </div>
-          <div id="navDemo" class="w3-bar-block w3-amber w3-hide w3-hide-large w3-hide-medium w3-large">
-            <a href="/memehub/feeds" class="w3-bar-item w3-button w3-padding-large">FEEDS</a>
-            <a href="/memehub/add" class="w3-bar-item w3-button w3-padding-large">ADD MEME</a>
-            <div class="w3-dropdown-click">
-              <button onclick="ProfileClick()" class="w3-bar-item w3-button w3-padding-large">MORE...</button>
-              <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
-                <a href="/memehub/profile" class="w3-bar-item w3-button">PROFILE</a>
-                <a href="/memehub/login" class="w3-bar-item w3-button">LOG IN</a>
-                <a href="/memehub/signup" class="w3-bar-item w3-button">SIGN UP</a>
+            <% if(!currentUser) { %>
+              <a href="/memehub/login" class="w3-padding-large w3-button">LOG IN</a>  
+            <% } else { %>
+                <a class="w3-padding-large w3-button" href="/memehub/profile"><%= currentUser.username %><i class="fa fa-caret-down"></i></a>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                  <a href="/memehub/logout" class="w3-bar-item w3-button">LOG OUT</a>
+                </div>
               </div>
-            </div>
-          </div>
+              <% } %>
         </div>
+        <div id="navDemo" class="w3-bar-block w3-amber w3-hide w3-hide-large w3-hide-medium w3-large">
+          <% if(!currentUser) { %>
+          <a href="/memehub/login" class="w3-bar-item w3-button w3-padding-large">LOG IN</a>
+          <% } else { %>
+          <a href="/memehub/profile" class="w3-bar-item w3-button w3-padding-large"><%= currentUser.username %></a>
+          <a href="/memehub/meme/add" class="w3-bar-item w3-button w3-padding-large">ADD MEME</a>
+          <a href="/memehub/logout" class="w3-bar-item w3-button w3-padding-large">LOG OUT</a>
+          <% } %>  
+        </div>
+      </div>
       </div>
         <title>MEMEHUB</title>
         <meta charset="UTF-8">

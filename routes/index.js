@@ -7,10 +7,6 @@ router.get("/",function(req,res){
     res.render("landing");
 });
 
-router.get("/add",function(req,res){
-    res.render("add");
-});
-
 router.get("/login",function(req,res){
     res.render("login");
 });
@@ -22,7 +18,7 @@ router.post("/login", passport.authenticate("local",{
 });
 
 router.get("/logout",function(req,res){
-    res.logout();
+    req.logout();
     res.redirect("/memehub");
 });
 
@@ -42,8 +38,8 @@ router.post("/signup", function(req,res){
     });
 });
 
-router.get("/profile",function(req,res){
-    res.render("profile.ejs");
+router.get("/profile", function(req,res){
+    res.render("profile");
 });
 
 module.exports = router;

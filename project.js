@@ -5,9 +5,10 @@ const   express = require("express"),
         passportLocal = require("passport-local"),
         passportLocalMongoose = require("passport-local-mongoose"),
         User = require("./models/user");
-        indexRoutes = require('./routes/index');
+        memeRoutes = require("./routes/meme"),
+        indexRoutes = require("./routes/index");
 
-const app = express();
+const   app = express();
 
 mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
 app.use(express.static("public"));
@@ -32,7 +33,8 @@ passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use('/memehub',indexRoutes);
+app.use("/memehub", indexRoutes);
+app.use("/memehub/meme", memeRoutes);
 
 
 app.listen(3000, function(req,res){
