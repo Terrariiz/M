@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+<br><br><br>
+<div class = "container col-md-6 jumbotron">
+    <h1>Login page</h1>
+    <form action = '/memehub/login' method = 'POST'>
+        <input type='text' name='username' placeholder="Username">
+        <input type='password' name='password' placeholder="Password">
+        <button>Log in</button>
+    </form>
+    <a href="/memehub/signup">Sign up</a>
+</div>
+<%- include("partials/footer") %>
