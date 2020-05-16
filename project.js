@@ -1,10 +1,13 @@
 const   express = require("express"),
         mongoose = require("mongoose"),
         bodyParser = require("body-parser"),
+        flash = require('connect-flash'),
         passport = require("passport"),
         passportLocal = require("passport-local"),
         passportLocalMongoose = require("passport-local-mongoose"),
-        User = require("./models/user");
+        User = require("./models/user"),
+        Meme = require("./models/meme"),
+        seedDB = require('./seeds'),
         memeRoutes = require("./routes/meme"),
         indexRoutes = require("./routes/index");
 
@@ -14,6 +17,8 @@ mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
+app.use(flash());
+seedDB();
 
 app.use(require("express-session")({
     secret: "CSS227",
@@ -25,6 +30,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 });
 
