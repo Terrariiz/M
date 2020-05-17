@@ -3,7 +3,7 @@ const express = require('express'),
       Meme = require("../models/meme"),
       middleware = require('../middleware');
 
-router.get("/",middleware.isLoggedIn, function(req,res){
+router.get("/",function(req,res){
     Meme.find({},function(error, allMeme){
         if(error){
             console.log("Error!");
@@ -18,12 +18,13 @@ router.post("/",middleware.isLoggedIn, function(req,res){
     let n_image = req.body.image;
     let n_desc = req.body.desc;
     let n_meme = {name:n_name,image:n_image,desc:n_desc};
+    console.log(n_meme);
     Meme.create(n_meme, function(error,newMeme){
         if(error){
             console.log("error");
         } else {
             console.log("New meme added.");
-            res.redirect("/memehub");
+            res.redirect("/memehub/meme");
         }
     });
 });
@@ -32,7 +33,7 @@ router.get("/add",middleware.isLoggedIn,function(req,res){
     res.render("memes/add");
 });
 
-router.get("/:id",middleware.isLoggedIn, function(req,res){
+router.get("/:id",function(req,res){
     Meme.findById(req.params.id).exec(function(error, idMeme){
         if(error){
             console.log("Error");

@@ -7,10 +7,8 @@ const   express = require("express"),
         passportLocalMongoose = require("passport-local-mongoose"),
         User = require("./models/user"),
         Meme = require("./models/meme"),
-        seedDB = require('./seeds'),
         memeRoutes = require("./routes/meme"),
         indexRoutes = require("./routes/index");
-
 const   app = express();
 
 mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
@@ -18,7 +16,6 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(flash());
-seedDB();
 
 app.use(require("express-session")({
     secret: "CSS227",

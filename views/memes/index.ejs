@@ -8,15 +8,13 @@
 
     <div class = "row" style="display:flex; flex-wrap:wrap;">
     <% Meme.forEach(function(meme){ %>
-        <div class="col-md-3 col-sm-6">
+        <a class="btn btn-outline-primary col-md-3 col-sm-6" href="/memehub/meme/<%= meme._id %>">
             <div class="img-thumbnail">
                 <img src=<%= meme.image %> class="img-fluid"> 
                 <p style="text-align: center;"><%= meme.name %></p>
-                <a class="btn btn-outline-primary" href="/memehub/meme/<%= meme._id %>" role="button">More detail...</a>
             </div>
-        </div>
+        </a>
     <% }); %>
+    </div>
 </div>
-</div>
-
 <%- include("../partials/footer") %>
