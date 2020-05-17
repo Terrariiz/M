@@ -10,7 +10,7 @@
             <% if(!currentUser) { %>
               <a href="/memehub/login" class="w3-padding-large w3-button w3-hover-white">LOG IN</a>  
             <% } else { %>
-              <a class="w3-padding-large w3-button w3-amber w3-hover-white w3-black" href="/memehub/profile"><%= currentUser.username %><i class="fa fa-caret-down"></i></a>
+              <a class="w3-padding-large w3-button w3-amber w3-hover-white w3-black" href="/memehub/profile"><%= currentUser.username %> <i class="fa fa-caret-down"></i></a>
               <div class="w3-dropdown-content w3-bar-block w3-card-4">
                 <a href="/memehub/logout" class="w3-bar-item w3-button w3-black w3-hover-white">LOG OUT</a>
               </div>

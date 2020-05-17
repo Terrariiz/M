@@ -2,10 +2,8 @@
 <div class = "container">
     <div class = "jumbotron" style="text-align: center;">
         <h2>MEME List</h2>
-        <p>This page shows all the Meme</p>
         <a class="btn btn-outline-primary" href="/memehub/meme/add" role="button">Add new Meme!</a>
     </div>
-
     <div class = "row" style="display:flex; flex-wrap:wrap;">
     <% Meme.forEach(function(meme){ %>
         <a class="btn btn-outline-primary col-md-3 col-sm-6" href="/memehub/meme/<%= meme._id %>">
