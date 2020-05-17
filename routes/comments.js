@@ -16,11 +16,15 @@ router.get('/new', middleware.isLoggedIn, function(req,res){
 });
 
 router.post('/', middleware.isLoggedIn, function(req,res){
+    let commenttext = req.body.comment;
+    let commentuser = req.user.username;
+    let addcomment = {text:commenttext, username:commentuser};
+
     Meme.findById(req.params.id, function(err, meme){
         if(err){
             console.log(err);
         } else {
-            Comment.create(req.body.comment, function(err,comment){
+            Comment.create(addcomment, function(err,comment){
                 if(err){
                     console.log(err);
                 } else {

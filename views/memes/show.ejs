@@ -4,11 +4,19 @@
     <h1><%= meme.name %></h1>
     <img src=<%= meme.image %> class="img-fluid"> 
     <p><%= meme.desc %></p>
-    <p>
-        <a class="btn btn-primary" href='/memehub/meme/<%= meme._id %>/comments/new'>Add new comment</a>
-    </p>
-    <% meme.comments.forEach(function(comment){ %>
-        <p><strong><%= comment.username %></strong> - <%= comment.text %></p>
-    <% }) %>
+    <% if(currentUser) { %>
+    <form action="/memehub/meme/<%= meme._id %>" method="POST">
+        <div class="form-group">
+            <label for="commentText">Comment</label>
+            <input type="text" class="form-control" name="comment" placeholder="Your comment here" required>
+        </div>
+        <button type="submit" style="float: right;">Comment</button>
+    </form>
+    <div class="container">
+        <% } %>
+        <% meme.comments.forEach(function(comment){ %>
+            <p><strong><%= comment.username %></strong>: <%= comment.text %></p>
+        <% }) %>
+    </div>
 </div>
 <%- include("../partials/footer") %>
