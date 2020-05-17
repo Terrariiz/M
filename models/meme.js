@@ -5,6 +5,7 @@ let memeSchema = new mongoose.Schema({
             name: String,
             image: String,
             desc: String,
+            username: String,
         });
 
 memeSchema.plugin(passportLocalMongoose);

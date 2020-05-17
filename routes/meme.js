@@ -17,7 +17,8 @@ router.post("/",middleware.isLoggedIn, function(req,res){
     let n_name = req.body.name;
     let n_image = req.body.image;
     let n_desc = req.body.desc;
-    let n_meme = {name:n_name,image:n_image,desc:n_desc};
+    let n_username = req.user.username;
+    let n_meme = {name:n_name,image:n_image,desc:n_desc,username:n_username};
     console.log(n_meme);
     Meme.create(n_meme, function(error,newMeme){
         if(error){
