@@ -1,2 +1,3 @@
-version 3.1
-add feature but it's bug
+version 3.2
+fixed bug
+add meme to database+
