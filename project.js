@@ -8,7 +8,9 @@ const   express = require("express"),
         User = require("./models/user"),
         Meme = require("./models/meme"),
         memeRoutes = require("./routes/meme"),
-        indexRoutes = require("./routes/index");
+        indexRoutes = require("./routes/index"),
+        commentsRoutes = require("./routes/comments");
+
 const   app = express();
 
 mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
@@ -39,6 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use("/memehub", indexRoutes);
 app.use("/memehub/meme", memeRoutes);
+app.use("/memehub/meme/:id/comments", commentsRoutes);
 
 
 app.listen(3000, function(req,res){

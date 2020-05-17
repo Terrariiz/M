@@ -4,5 +4,11 @@
     <h1><%= meme.name %></h1>
     <img src=<%= meme.image %> class="img-fluid"> 
     <p><%= meme.desc %></p>
+    <p>
+        <a class="btn btn-primary" href='/memehub/meme/<%= meme._id %>/comments/new'>Add new comment</a>
+    </p>
+    <% meme.comments.forEach(function(comment){ %>
+        <p><strong><%= comment.username %></strong> - <%= comment.text %></p>
+    <% }) %>
 </div>
 <%- include("../partials/footer") %>

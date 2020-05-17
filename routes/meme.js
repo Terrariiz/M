@@ -1,6 +1,7 @@
 const express = require('express'),
       router = express.Router();
       Meme = require("../models/meme"),
+      User = require("../models/user"),
       middleware = require('../middleware');
 
 router.get("/",function(req,res){
@@ -19,7 +20,6 @@ router.post("/",middleware.isLoggedIn, function(req,res){
     let n_desc = req.body.desc;
     let n_username = req.user.username;
     let n_meme = {name:n_name,image:n_image,desc:n_desc,username:n_username};
-    console.log(n_meme);
     Meme.create(n_meme, function(error,newMeme){
         if(error){
             console.log("error");
@@ -35,12 +35,8 @@ router.get("/add",middleware.isLoggedIn,function(req,res){
 });
 
 router.get("/:id",function(req,res){
-    Meme.findById(req.params.id).exec(function(error, idMeme){
-        if(error){
-            console.log("Error");
-        } else {
+    Meme.findById(req.params.id).populate("comments").exec(function(error, idMeme){
             res.render("memes/show",{meme:idMeme});
-        }
     });
 });
 

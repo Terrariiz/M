@@ -6,6 +6,12 @@ let memeSchema = new mongoose.Schema({
             image: String,
             desc: String,
             username: String,
+            comments: [
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Comment'
+                }
+            ]
         });
 
 memeSchema.plugin(passportLocalMongoose);
