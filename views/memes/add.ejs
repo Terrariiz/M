@@ -1,6 +1,6 @@
 <%- include("../partials/header") %>
-<div class="container jumbotron" style="width:35%;margin:25px auto;">
-    <h3 style="text-align: center;">Add new MEME</h3>
+<div class="container jumbotron" style="width:55%;margin:25px auto;">
+    <h3 style="text-align: center;">Add new MEME</h3><br>
     <form action="/memehub/meme" method="POST">
         <div class="form-group">
             <label for=",memeName">Meme name</label>
@@ -13,8 +13,8 @@
         <div class="form-group">
             <label for="memeDesc">Description</label>
             <input type="text" class="form-control" name="desc" placeholder="Meme description">
-        </div>        
-        <center><button>Add</button></center>
+        </div><br>        
+        <center><button class="btn btn-outline-primary">Add</button></center>
   </form>
 </div>
 <%- include("../partials/footer") %>

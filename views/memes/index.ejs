@@ -1,12 +1,12 @@
 <%- include("../partials/header") %>
-<div class = "container">
+<div class = "container" style="margin:25px auto;">
     <div class = "jumbotron" style="text-align: center;">
         <h2>MEME List</h2>
         <a class="btn btn-outline-primary" href="/memehub/meme/add" role="button">Add new Meme!</a>
     </div>
     <div class = "row" style="display:flex; flex-wrap:wrap;">
     <% Meme.forEach(function(meme){ %>
-        <a class="btn btn-outline-primary col-md-3 col-sm-6" href="/memehub/meme/<%= meme._id %>">
+        <a class="btn btn btn-light col-md-3 col-sm-6" href="/memehub/meme/<%= meme._id %>">
             <div class="img-thumbnail">
                 <p><strong><%= meme.username %></strong></p>
                 <img src=<%= meme.image %> class="img-fluid"> 
