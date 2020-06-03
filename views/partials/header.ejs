@@ -1,12 +1,12 @@
 <!DOCTYPE html>
     <head>
       <div class="sticky-top">
-        <div class="w3-bar w3-card w3-left-align w3-large" style="background-color:rgba(255, 150, 150, 1);">
-          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large" href="javascript:void(0);" onclick="navClick()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-          <a href="/memehub" class="w3-bar-item w3-button w3-padding-large w3-white w3-hover-black">MEMEHUB</a>
-          <a href="/memehub/meme/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-black" style="background-color:rgba(255, 100, 100, 1);">MEME</a>
-          <a href="/memehub/meme/add" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-black"  style="background-color:rgba(255, 100, 100, 1);">ADD MEME</a>
-          <div class="w3-dropdown-hover w3-hide-small" style="float:right; background-color:rgba(255, 100, 100, 1);">
+        <div class="w3-bar w3-card w3-left-align w3-large w3-amber">
+          <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-amber w3-hover-white w3-large" href="javascript:void(0);" onclick="navClick()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+          <a href="/memehub" class="w3-bar-item w3-button w3-padding-large w3-black w3-hover-white">MEMEHUB</a>
+          <a href="/memehub/meme/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-black">MEME</a>
+          <a href="/memehub/meme/add" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-black">ADD MEME</a>
+          <div class="w3-dropdown-hover w3-hide-small" style="float:right;">
             <% if(!currentUser) { %>
               <a href="/memehub/login" class="w3-padding-large w3-button w3-hover-white">LOG IN</a>  
             <% } else { %>
@@ -27,6 +27,18 @@
           <a href="/memehub/logout" class="w3-bar-item w3-button w3-padding-large w3-hover-white">LOG OUT</a>
           <% } %> 
         </div>
+      </div>
+      <div class='container'>
+        <% if (error && error.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= error %>
+          </div>
+        <% } %>
+        <% if (success && success.length > 0) { %>
+          <div class="alert alert-success" role="alert">
+            <%= success %>
+          </div>
+        <% } %>
       </div>
         <title>MEMEHUB</title>
         <meta charset="UTF-8">

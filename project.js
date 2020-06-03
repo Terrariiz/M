@@ -5,6 +5,7 @@ const   express = require("express"),
         passport = require("passport"),
         passportLocal = require("passport-local"),
         passportLocalMongoose = require("passport-local-mongoose"),
+        methodOverride = require("method-override"),
         User = require("./models/user"),
         Meme = require("./models/meme"),
         memeRoutes = require("./routes/meme"),
@@ -18,6 +19,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(flash());
+app.use(methodOverride("_method"));
 
 app.use(require("express-session")({
     secret: "CSS227",
@@ -33,7 +35,6 @@ app.use(function(req,res,next){
     res.locals.success = req.flash('success');
     next();
 });
-
 
 passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());

@@ -1,15 +1,13 @@
 <%- include("../partials/header") %>
 <div class="container col-md-6 jumbotron" style="margin:25px auto;">
     <div>
-        <svg class="bi bi-star" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-        </svg>
-        <svg class="bi bi-three-dots" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="float:right;">
-            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-        </svg>
-    </div>
-    <div>
-        <h1><strong><%= meme.username %></strong></h1>
+        <% if(currentUser && meme.author.id.equals(currentUser._id)){ %> 
+        <p style="text-align: right;"><a class="btn btn-xs btn-warning" href="/memehub/meme/<%= meme._id %>/edit">Edit</a></p>
+        <form id="delete-form" action="/memehub/meme/<%= meme._id %>?_method=DELETE" method="POST" style="text-align: right;">       
+            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+        </form>
+        <% } %>
+        <h1><strong><%= meme.author.username %></strong></h1>
         <h3><%= meme.name %></h3>
         <center><img src=<%= meme.image %> class="img-fluid" onclick="document.getElementById('modal01').style.display='block'"></center>
             <div id="modal01" class="w3-modal" onclick="this.style.display='none'">

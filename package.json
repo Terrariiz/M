@@ -17,6 +17,7 @@
     "jquery": "^3.5.0",
     "lowercase-keys": "^1.0.1",
     "media-typer": "^0.3.0",
+    "method-override": "^3.0.0",
     "mime": "^1.6.0",
     "mime-db": "^1.43.0",
     "mongoose": "^5.9.10",
