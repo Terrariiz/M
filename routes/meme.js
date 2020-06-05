@@ -25,7 +25,7 @@ router.post("/", middleware.isLoggedIn, function(req,res){
     let n_meme = {name:n_name,image:n_image,desc:n_desc, author: n_author};
     Meme.create(n_meme, function(error,newMeme){
         if(error){
-            console.log("error");
+            console.log(error);
         } else {
             console.log("New meme added.");
             res.redirect("/memehub/meme");
@@ -40,7 +40,7 @@ router.get("/add", middleware.isLoggedIn,function(req,res){
 router.get("/:id", function(req,res){
     Meme.findById(req.params.id).populate("comments").exec(function(error, idMeme){
         if(error){
-            console.log("Error");
+            console.log(error);
         } else {
             res.render("memes/show",{meme:idMeme});
         }

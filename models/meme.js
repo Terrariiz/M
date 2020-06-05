@@ -6,7 +6,7 @@ let memeSchema = new mongoose.Schema({
             image: String,
             desc: String,
             author: {
-                id:{
+                id: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "User"
                 },
