@@ -1,14 +1,14 @@
 <%- include("../partials/header") %>
 <div class="container jumbotron" style="width:55%;margin:25px auto;">
     <h3 style="text-align: center;">Add new MEME</h3><br>
-    <form action="/memehub/meme" method="POST">
+    <form action="/memehub/meme" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
             <label for="memeName">Meme name</label>
             <input type="text" class="form-control" name="name" placeholder="Name of meme" required>
         </div>
         <div class="form-group">
-            <label for="memeURL">Image URL</label>
-            <input type="text" class="form-control" name="image" placeholder="URL of image" required>
+            <label for="memeImageUpload">Image File</label>
+            <input type="file" class="form-control" name="image" required accept="image/*">
         </div>
         <div class="form-group">
             <label for="memeDesc">Description</label>

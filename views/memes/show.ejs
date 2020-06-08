@@ -7,18 +7,11 @@
             <button type="submit" class="btn btn-xs btn-danger">Delete</button>
         </form>
         <% } %>
-        <h1><strong><%= meme.author.username %></strong></h1>
-        <h3><%= meme.name %></h3>
-        <center><img src=<%= meme.image %> class="img-fluid" onclick="document.getElementById('modal01').style.display='block'"></center>
-            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
-                <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
-                <div class="w3-modal-content w3-animate-zoom">
-                    <center><img src=<%= meme.image %> style="width:50%"></center>
-                </div>
-            </div>
+        <h1><%= meme.name %></h1>
+        <img src=<%= '../uploads/'+ meme.image %> class="img-fluid"> 
         <p><%= meme.desc %></p>
-        <% if(currentUser) { %>
     </div>
+    <% if(currentUser) { %>
     <form action="/memehub/meme/<%= meme._id %>/comments" method="POST">
         <div class="form-group">
             <label for="commentText">Comment</label>
@@ -29,7 +22,6 @@
     <div class="container">
         <% } %>
         <% meme.comments.forEach(function(comment){ %>
-            <!-- <p><strong><%= comment.author.username %></strong>: <%= comment.text %></p> -->
             <p><strong><%= comment.author.username %></strong> - <%= comment.text %></p>
             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %> 
                 <a class="btn btn-xs btn-warning" href='/memehub/meme/<%= meme._id %>/comments/<%= comment._id %>/edit'>Edit</a>
