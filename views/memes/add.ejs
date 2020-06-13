@@ -3,17 +3,32 @@
     <h3 style="text-align: center;">Add new MEME</h3><br>
     <form action="/memehub/meme" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
-            <label for="memeName">Meme name</label>
+            <label for="memeName"><strong>Meme name</strong></label>
             <input type="text" class="form-control" name="name" placeholder="Name of meme" required>
         </div>
         <div class="form-group">
-            <label for="memeImageUpload">Image File</label><br>
+            <label for="memeImageUpload"><strong>Image File</strong></label><br>
             <input type="file" name="image" style="width:100%;" required accept="image/*">
         </div>
         <div class="form-group">
-            <label for="memeDesc">Description</label>
+            <label for="memeDesc"><strong>Description</strong></label>
             <input type="text" class="form-control" name="desc" placeholder="Meme description">
-        </div><br>        
+        </div>
+        <h6><strong>Category</strong></h6>
+        <div class="form-group" required>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="category" value="nonsense">
+                <label class="form-check-label" for="inlineRadio1">Non-sense</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="category" value="science">
+                <label class="form-check-label" for="inlineRadio2">Science</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="category" value="comsci">
+                <label class="form-check-label" for="inlineRadio3">Com-sci</label>
+            </div>
+        </div>
         <center><button class="btn btn-outline-primary">Add</button></center>
   </form>
 </div>

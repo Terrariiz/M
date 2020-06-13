@@ -10,7 +10,7 @@ router.get('/new', middleware.isLoggedIn, function(req,res){
         if(err){
             console.log(err);
         } else {
-            res.render('comment/new',{meme: meme});
+            res.render('comment',{meme: meme});
         }
     });
 });

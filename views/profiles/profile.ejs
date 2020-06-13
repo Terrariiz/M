@@ -1,0 +1,22 @@
+<%- include("../partials/header") %>
+<br>
+<div class="w3-third">
+  <div class="w3-white w3-text-grey w3-card-4">
+    <div class="w3-container w3-text-black">
+      <h1><%= currentUser.username %></h1>
+    </div>   
+    <div class="w3-display-container">
+      <center><img src="https://avatars0.githubusercontent.com/u/59905925?s=400&u=faa7d65216268e5e35bcb3e4226265ab08471580&v=4" class="img-fluid img-thumbnail" style="width: 400px; height: 400px;" alt="Avatar"></center>
+    </div>
+    <div>
+      <h3>Name: <%= currentUser.name %></h3>
+      <h3>Email: <%= currentUser.email %></h3>
+    </div>
+  </div>
+</div>
+<div class="w3-twothird">
+  <div class="w3-white w3-text-grey w3-card-4">
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

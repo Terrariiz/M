@@ -1,10 +1,18 @@
-const express = require('express'),
-      router = express.Router();
-      passport = require('passport'),
-      User = require('../models/user');
+const   express = require('express'),
+        router = express.Router(),
+        passport = require('passport'),
+        Meme = require("../models/meme"),
+        User = require('../models/user'),
+        middleware = require('../middleware');
 
 router.get("/",function(req,res){
-    res.render("landing");
+    Meme.find({},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("landing",{Meme:allMeme});
+        }
+    })
 });
 
 router.get("/login",function(req,res){
@@ -32,21 +40,23 @@ router.get("/signup",function(req,res){
 });
 
 router.post("/signup", function(req,res){
-    User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+    User.register(new User({username: req.body.username, email: req.body.email, name: req.body.name}), req.body.password, function(err, user){
         if(err){
             console.log(err);
             req.flash("failure","Username has already use");
             return res.render("signup");
         }
         passport.authenticate("local")(req,res,function(){
+            console.log("New account created");
             req.flash('success','Welcome , ' + user.username);
             res.redirect("/memehub");
         });
     });
 });
 
-router.get("/profile", function(req,res){
-    res.render("profile");
+router.get("/profile", middleware.isLoggedIn, function(req,res){
+    res.render("profiles/profile");        
 });
+
 
 module.exports = router;

@@ -5,25 +5,25 @@ const   express = require('express'),
         Meme = require("../models/meme"),
         middleware = require('../middleware');
 
-const   storage = multer.diskStorage({
-    destination: "./public/uploads",
-    filename: function(req, file, cb){
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+const storage = multer.diskStorage({
+    destination: '../public/uploads',
+    filename: function(req, file, cb) {
+        cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 
-const   imageFilter = function(req, file, cb){
+const imageFilter = function(req, file, cb){
     var ext = path.extname(file.originalname);
     if(ext !== '.png' && ext !== '.gif' && ext !== '.jpg' && ext !== '.jpeg'){
         return cb(new Error('Only image is allowed'), false)
-    }
-    cb(null, true);
-}
+        }
+        cb(null, true);
+};
 
-const   upload = multer({storage: storage, fileFilter: imageFilter})
-
+const upload = multer({storage: storage, fileFilter: imageFilter})
+      
 router.get("/", function(req,res){
-    Meme.find({},function(error, allMeme){
+    Meme.find({category:"science"},function(error, allMeme){
         if(error){
             console.log("Error!");
         } else {
@@ -36,11 +36,12 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
     let n_name = req.body.name;
     let n_image = req.file.filename;
     let n_desc = req.body.desc;
+    let n_category = req.body.category;
     let n_author = {
         id: req.user._id, 
         username: req.user.username
     };
-    let n_meme = {name:n_name,image:n_image,desc:n_desc, author: n_author};
+    let n_meme = {name:n_name,image:n_image,desc:n_desc, author: n_author, category: n_category};
     Meme.create(n_meme, function(error,newMeme){
         if(error){
             console.log(error);
