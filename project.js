@@ -2,6 +2,7 @@ const   express = require("express"),
         mongoose = require("mongoose"),
         bodyParser = require("body-parser"),
         flash = require('connect-flash'),
+        path = require("path"),
         passport = require("passport"),
         passportLocal = require("passport-local"),
         passportLocalMongoose = require("passport-local-mongoose"),
@@ -18,7 +19,7 @@ mongoose.set("useUnifiedTopology", true);
 mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(flash());

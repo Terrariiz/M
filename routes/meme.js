@@ -6,7 +6,7 @@ const   express = require('express'),
         middleware = require('../middleware');
 
 const storage = multer.diskStorage({
-    destination: '../public/uploads',
+    destination: './public/uploads',
     filename: function(req, file, cb) {
         cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
@@ -21,15 +21,49 @@ const imageFilter = function(req, file, cb){
 };
 
 const upload = multer({storage: storage, fileFilter: imageFilter})
-      
-router.get("/", function(req,res){
+
+router.get("/category/undifined",function(req,res){
+    Meme.find({category:null},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("memes/categoryIndex",{Meme:allMeme});
+        }
+    })
+});
+
+router.get("/category/science",function(req,res){
     Meme.find({category:"science"},function(error, allMeme){
         if(error){
             console.log("Error!");
         } else {
-            res.render("memes/index",{Meme:allMeme});
+            res.render("memes/categoryIndex",{Meme:allMeme});
         }
     })
+});
+
+router.get("/category/nonsense",function(req,res){
+    Meme.find({category:"nonsense"},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("memes/categoryIndex",{Meme:allMeme});
+        }
+    })
+});
+
+router.get("/category/comsci",function(req,res){
+    Meme.find({category:"comsci"},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("memes/categoryIndex",{Meme:allMeme});
+        }
+    })
+});
+
+router.get("/", function(req,res){
+    res.render("memes/index");
 });
 
 router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res){
@@ -47,7 +81,7 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
             console.log(error);
         } else {
             console.log("New meme added.");
-            res.redirect("/memehub/meme");
+            res.redirect("/memehub");
         }
     });
 });
@@ -75,7 +109,7 @@ router.get("/:id/edit", middleware.checkMemeOwnership, function(req,res){
 router.put("/:id", middleware.checkMemeOwnership, function(req,res){
     Meme.findByIdAndUpdate(req.params.id, req.body.meme, function(err, updatedMeme){
         if(err){
-            res.redirect("/memehub/meme");
+            res.redirect("/memehub");
         } else {
             res.redirect('/memehub/meme/' + req.params.id);
         }
@@ -85,10 +119,10 @@ router.put("/:id", middleware.checkMemeOwnership, function(req,res){
 router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
     Meme.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/memehub/meme");
+            res.redirect("/memehub");
         }
         else{
-            res.redirect("/memehub/meme");
+            res.redirect("/memehub");
         }
     });
 });

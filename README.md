@@ -1,4 +1,2 @@
-version 3.5
-profile beta
-memeIndex beta
-photo from folder still bug
+version 3.6
+category feature+
