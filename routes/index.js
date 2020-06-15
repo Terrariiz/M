@@ -55,7 +55,13 @@ router.post("/signup", function(req,res){
 });
 
 router.get("/profile", middleware.isLoggedIn, function(req,res){
-    res.render("profiles/profile");        
+    Meme.find({},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("profiles/profile",{Meme:allMeme});
+        }
+    })    
 });
 
 

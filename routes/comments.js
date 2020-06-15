@@ -5,7 +5,6 @@ const   express = require('express'),
         middleware = require('../middleware');
 
 router.get('/new', middleware.isLoggedIn, function(req,res){
-    // console.log(req.params.id);
     Meme.findById(req.params.id, function(err, meme){
         if(err){
             console.log(err);
@@ -14,28 +13,6 @@ router.get('/new', middleware.isLoggedIn, function(req,res){
         }
     });
 });
-
-// router.post('/', middleware.isLoggedIn, function(req,res){
-//     let commenttext = req.body.comment;
-//     let commentuser = req.user.username;
-//     let addcomment = {text:commenttext, username:commentuser};
-
-//     Meme.findById(req.params.id, function(err, meme){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             Comment.create(addcomment, function(err,comment){
-//                 if(err){
-//                     console.log(err);
-//                 } else {
-//                     meme.comments.push(comment);
-//                     meme.save();
-//                     res.redirect('/memehub/meme/' + meme._id);
-//                 }
-//             });
-//         }
-//     });
-// });
 
 router.post('/', middleware.isLoggedIn, function(req,res){
     Meme.findById(req.params.id, function(err, meme){

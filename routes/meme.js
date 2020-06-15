@@ -3,6 +3,7 @@ const   express = require('express'),
         multer = require("multer"),
         path = require("path"),
         Meme = require("../models/meme"),
+        Comments = require("../models/comment"),
         middleware = require('../middleware');
 
 const storage = multer.diskStorage({
@@ -117,11 +118,17 @@ router.put("/:id", middleware.checkMemeOwnership, function(req,res){
 });
 
 router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
-    Meme.findByIdAndRemove(req.params.id, function(err){
+    Meme.findByIdAndRemove(req.params.id, function(err,select){
         if(err){
             res.redirect("/memehub");
         }
         else{
+            (select.comments).forEach(element => {
+                console.log(element);
+                Comments.findByIdAndRemove(element, function(err, comment){
+                    console.log("Meme deleted");
+                });
+            });
             res.redirect("/memehub");
         }
     });

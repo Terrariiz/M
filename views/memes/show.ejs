@@ -1,6 +1,7 @@
 <%- include("../partials/header") %>
 <div class="container col-md-6 jumbotron" style="margin:25px auto;">
     <div>
+        <h5>category: <%= meme.category %></h5>
         <% if(currentUser && meme.author.id.equals(currentUser._id)){ %> 
         <p style="text-align: right;"><a class="btn btn-xs btn-warning" href="/memehub/meme/<%= meme._id %>/edit">Edit</a></p>
         <form id="delete-form" action="/memehub/meme/<%= meme._id %>?_method=DELETE" method="POST" style="text-align: right;">       
