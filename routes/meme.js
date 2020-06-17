@@ -2,6 +2,7 @@ const   express = require('express'),
         router = express.Router(),
         multer = require("multer"),
         path = require("path"),
+        fs = require("fs"),
         Meme = require("../models/meme"),
         Comments = require("../models/comment"),
         middleware = require('../middleware');
@@ -87,7 +88,7 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
     });
 });
 
-router.get("/add", middleware.isLoggedIn,function(req,res){
+router.get("/add", middleware.isLoggedIn, function(req,res){
     res.render("memes/add");
 });
 
@@ -123,6 +124,13 @@ router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
             res.redirect("/memehub");
         }
         else{
+            const imagePath = './public/uploads/' + select.image;
+            fs.unlink(imagePath, function(err){
+                if(err){
+                    console.log(err);
+                    res.redirect('/memehub');
+                }
+            });
             (select.comments).forEach(element => {
                 console.log(element);
                 Comments.findByIdAndRemove(element, function(err, comment){

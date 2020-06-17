@@ -48,7 +48,6 @@ app.use("/memehub", indexRoutes);
 app.use("/memehub/meme", memeRoutes);
 app.use("/memehub/meme/:id/comments", commentsRoutes);
 
-
 app.listen(3000, function(req,res){
-    console.log("Started Now!!");
+    console.log("Link Start!");
 });

@@ -18,7 +18,7 @@ let memeSchema = new mongoose.Schema({
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Comment"
                 }
-            ]
+            ],
         });
 
 memeSchema.plugin(passportLocalMongoose);
