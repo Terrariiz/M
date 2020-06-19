@@ -1,6 +1,7 @@
 const   express = require('express'),
         router = express.Router(),
         multer = require("multer"),
+        axios = require("axios"),
         path = require("path"),
         fs = require("fs"),
         Meme = require("../models/meme"),
@@ -90,6 +91,14 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
 
 router.get("/add", middleware.isLoggedIn, function(req,res){
     res.render("memes/add");
+});
+
+router.post('/:id/like/:action', middleware.isLoggedIn, (req, res, next) => {
+    const action = req.params.action;
+    const counter = action === 'Like' ? 1 : -1;
+    Meme.update({_id: req.params.id}, {$inc: {like_count: counter}}, {}, (err, numberAffected) => {
+        res.send('');
+    });
 });
 
 router.get("/:id", function(req,res){

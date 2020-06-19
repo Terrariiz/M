@@ -13,6 +13,12 @@
         <p><%= meme.desc %></p>
     </div>
     <% if(currentUser) { %>
+    <div class="row">
+        <button onclick="actOnPost(event);"
+            data-post-id="<%= meme._id %>">Like
+        </button>
+        <span id="likes-count-<%= meme._id %>"><%= meme.like_count %></span>
+    </div>
     <form action="/memehub/meme/<%= meme._id %>/comments" method="POST">
         <div class="form-group">
             <label for="commentText">Comment</label>
@@ -34,3 +40,32 @@
     </div>
 </div>
 <%- include("../partials/footer") %>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var updatePostStats = {
+            Like: function (postId) {
+                document.querySelector('#likes-count-' + postId).textContent++;
+            },
+            Unlike: function(postId) {
+                document.querySelector('#likes-count-' + postId).textContent--;
+            }
+        };
+
+        var toggleButtonText = {
+            Like: function(button) {
+                button.textContent = "Unlike";
+            },
+            Unlike: function(button) {
+                button.textContent = "Like";
+            }
+        };
+
+        var actOnPost = function (event) {
+            var postId = event.target.dataset.postId;
+            var action = event.target.textContent.trim();
+            toggleButtonText[action](event.target);
+            updatePostStats[action](postId);
+            var data = action;
+            axios.post(postId + '/like/' + action);
+        };
+    </script>
