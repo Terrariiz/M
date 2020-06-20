@@ -107,7 +107,6 @@ router.put("/profile/:id", middleware.isLoggedIn, upload.single("image"), functi
                     fs.unlink(imagePath, function(err){
                         if(err){
                             console.log(err);
-                            res.redirect("/memehub/profile/" + req.params.id);
                         }
                     });
                 }                
