@@ -19,18 +19,17 @@
         </button>
         <span id="likes-count-<%= meme._id %>"><%= meme.like_count %></span>
     </div>
+    <% } %>
     <form action="/memehub/meme/<%= meme._id %>/comments" method="POST">
         <div class="form-group">
-            <label for="commentText">Comment</label>
-            <input type="text" class="form-control" name="comment[text]" placeholder="Your comment here" required>
+            <input type="text" class="form-control" name="comment[text]" placeholder="Comment something..." required>
         </div>
         <button class="btn btn-outline-primary" type="submit" style="float: right;">Comment</button>
     </form>
     <div class="container">
-        <% } %>
         <% meme.comments.forEach(function(comment){ %>
             <p><strong><%= comment.author.username %></strong> - <%= comment.text %></p>
-            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %> 
+            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                 <a class="btn btn-xs btn-warning" href='/memehub/meme/<%= meme._id %>/comments/<%= comment._id %>/edit'>Edit</a>
                 <form id="delete-form" action="/memehub/meme/<%= meme._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">       
                     <button class="btn btn-xs btn-danger">Delete</button>

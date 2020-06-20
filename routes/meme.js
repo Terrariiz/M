@@ -1,7 +1,6 @@
 const   express = require('express'),
         router = express.Router(),
         multer = require("multer"),
-        axios = require("axios"),
         path = require("path"),
         fs = require("fs"),
         Meme = require("../models/meme"),
