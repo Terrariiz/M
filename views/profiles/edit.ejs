@@ -3,11 +3,11 @@
   <h1 style="text-align: center;">Edit profile</h1><br>
     <form action = '/memehub/profile/<%= currentUser.id %>?_method=PUT' method = 'POST' enctype='multipart/form-data'>
         <a style="text-align: left;">Name</a>
-        <center><input type="text" class="form-control" name="name" value="<%= user.name %>" required></center><br>
+        <center><input type="text" class="form-control" name="name" placeholder="Enter name" value="<%= user.name %>" required></center><br>
         <a style="text-align: left;">Email address</a>
-        <center><input type="email" class="form-control" name="email" value="<%= user.email %>" required></center><br>        
-        <a for="memeImageUpload">Image File</a>
-        <center><input type="file" class="form-control" name="image" accept="image/*"></center><br>        
+        <center><input type="email" class="form-control" name="email" placeholder="Enter Email" value="<%= user.email %>" required></center><br>        
+        <a for="memeImageUpload">Image File</a><br>
+        <input type="file" name="image" accept="image/*"><br>        
         <center><button class="btn btn-warning">Edit</button></center>
   </form>
 </div>

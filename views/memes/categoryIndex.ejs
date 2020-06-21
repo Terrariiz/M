@@ -9,7 +9,7 @@
         <a class="btn btn-light col-md-3 col-sm-6" href="/memehub/meme/<%= meme._id %>">
             <div class="img-thumbnail">
                 <p><strong><%= meme.author.username %></strong></p>
-                <img src=<%= "/uploads/" + meme.image %> class="img-fluid" style="margin: auto; width: 250px; height: 250px; object-fit: cover;">
+                <img src=<%= "/uploads/" + meme.image %> class="img-fluid" style="margin: auto; width: 250px; height: 250px;">
                 <p style="text-align: center;"><%= meme.name %></p>
             </div>
         </a>
