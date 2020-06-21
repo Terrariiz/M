@@ -1,7 +1,6 @@
 const   express = require("express"),
         mongoose = require("mongoose"),
         bodyParser = require("body-parser"),
-        axios = require("axios"),
         flash = require('connect-flash'),
         path = require("path"),
         passport = require("passport"),
@@ -45,9 +44,9 @@ passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use("/memehub", indexRoutes);
-app.use("/memehub/meme", memeRoutes);
-app.use("/memehub/meme/:id/comments", commentsRoutes);
+app.use("/edumeme", indexRoutes);
+app.use("/edumeme/meme", memeRoutes);
+app.use("/edumeme/meme/:id/comments", commentsRoutes);
 
 app.listen(3000, function(req,res){
     console.log("Link Start!");

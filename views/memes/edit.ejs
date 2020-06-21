@@ -1,14 +1,14 @@
 <%- include("../partials/header") %>
 <div class="container jumbotron" style="width:55%;margin:25px auto;">
     <h3 style="text-align: center;">Edit</h3><br>
-    <center><img src=<%= meme.image %> class="img-fluid" onclick="document.getElementById('modal01').style.display='block'"></center>
+    <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid" onclick="document.getElementById('modal01').style.display='block'"></center>
     <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
         <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
         <div class="w3-modal-content w3-animate-zoom">
-            <center><img src=<%= meme.image %> style="width:50%"></center>
+            <center><img src=<%= '/uploads/'+ meme.image %> style="width:50%"></center>
         </div>
     </div>
-    <form action="/memehub/meme/<%= meme._id %>?_method=PUT" method="POST">
+    <form action="/edumeme/meme/<%= meme._id %>?_method=PUT" method="POST">
         <div class="form-group">
             <label for="memeName">Meme name</label>
             <input type="text" class="form-control" name="meme[name]" value="<%= meme.name %>">

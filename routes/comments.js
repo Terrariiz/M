@@ -18,7 +18,7 @@ router.post('/', middleware.isLoggedIn, function(req,res){
     Meme.findById(req.params.id, function(err, meme){
         if(err){
             console.log(err);
-            res.redirect('/memehub/meme');
+            res.redirect('/edumeme/meme');
         } else {
             Comment.create(req.body.comment, function(err,comment){
                 if(err){
@@ -29,7 +29,7 @@ router.post('/', middleware.isLoggedIn, function(req,res){
                     comment.save();
                     meme.comments.push(comment);
                     meme.save();
-                    res.redirect('/memehub/meme/' + meme._id);
+                    res.redirect('/edumeme/meme/' + meme._id);
                 }
             });
         }
@@ -51,7 +51,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req,res){
         if(err){
             res.redirect('back');
         } else {
-            res.redirect('/memehub/meme/' + req.params.id);
+            res.redirect('/edumeme/meme/' + req.params.id);
         }
     });
 });
@@ -61,7 +61,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res
         if(err){
             res.redirect('back'); 
         } else {
-            res.redirect('/memehub/meme/' + req.params.id);
+            res.redirect('/edumeme/meme/' + req.params.id);
         }
     });
 });

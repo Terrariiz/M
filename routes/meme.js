@@ -82,8 +82,8 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
         if(error){
             console.log(error);
         } else {
-            console.log("New meme added.");
-            res.redirect("/memehub");
+            console.log(newMeme);
+            res.redirect("/edumeme");
         }
     });
 });
@@ -119,9 +119,9 @@ router.get("/:id/edit", middleware.checkMemeOwnership, function(req,res){
 router.put("/:id", middleware.checkMemeOwnership, function(req,res){
     Meme.findByIdAndUpdate(req.params.id, req.body.meme, function(err, updatedMeme){
         if(err){
-            res.redirect("/memehub");
+            res.redirect("/edumeme");
         } else {
-            res.redirect('/memehub/meme/' + req.params.id);
+            res.redirect('/edumeme/meme/' + req.params.id);
         }
     });
 });
@@ -129,14 +129,14 @@ router.put("/:id", middleware.checkMemeOwnership, function(req,res){
 router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
     Meme.findByIdAndRemove(req.params.id, function(err,select){
         if(err){
-            res.redirect("/memehub");
+            res.redirect("/edumeme");
         }
         else{
             const imagePath = './public/uploads/' + select.image;
             fs.unlink(imagePath, function(err){
                 if(err){
                     console.log(err);
-                    res.redirect('/memehub');
+                    res.redirect('/edumeme');
                 }
             });
             (select.comments).forEach(element => {
@@ -145,7 +145,7 @@ router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
                     console.log("Meme deleted");
                 });
             });
-            res.redirect("/memehub");
+            res.redirect("/edumeme");
         }
     });
 });

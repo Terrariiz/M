@@ -40,7 +40,7 @@ router.get("/login",function(req,res){
 });
 
 router.post("/login", passport.authenticate("local",{
-        successRedirect: "/memehub",
+        successRedirect: "/edumeme",
         failureRedirect: "login",
         successFlash: true,
         failureFlash: true,
@@ -52,7 +52,7 @@ router.post("/login", passport.authenticate("local",{
 router.get("/logout",function(req,res){
     req.logout();
     req.flash("success","Log out successfully");
-    res.redirect("/memehub");
+    res.redirect("/edumeme");
 });
 
 router.get("/signup",function(req,res){
@@ -69,7 +69,7 @@ router.post("/signup", function(req,res){
         passport.authenticate("local")(req,res,function(){
             console.log("New account created");
             req.flash('success','Welcome , ' + user.username);
-            res.redirect("/memehub");
+            res.redirect("/edumeme");
         });
     });
 });
@@ -79,7 +79,13 @@ router.get("/profile/:id", middleware.isLoggedIn, function(req,res){
         if(error){
             console.log(error);
         } else {
-            res.render("profiles/profile",{user:idUser});
+            Meme.find({ "author.id": req.params.id },function(error, allMeme){
+                if(error){
+                    console.log(error);
+                } else {
+                    res.render("profiles/profile",{user:idUser, Meme:allMeme});
+                }
+            })
         }
     });
 });
@@ -98,7 +104,7 @@ router.put("/profile/:id", middleware.isLoggedIn, upload.single("image"), functi
         User.findById(req.params.id, function(err, foundUser){
             if(err){
                 console.log(err);
-                res.redirect("/memehub/profile/" + req.params.id);
+                res.redirect("/edumeme/profile/" + req.params.id);
             } else{
                 const imagePath = "./public/profileimg/" + foundUser.image;
                 if(foundUser.image === "default.jpg"){
@@ -122,7 +128,7 @@ router.put("/profile/:id", middleware.isLoggedIn, upload.single("image"), functi
             console.log(err);
         } else {
             console.log(updateUser);
-            res.redirect('/memehub/profile/' + req.params.id);
+            res.redirect('/edumeme/profile/' + req.params.id);
         }
     });
 });
