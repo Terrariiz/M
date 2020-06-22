@@ -68,6 +68,30 @@ router.get("/", function(req,res){
     res.render("memes/index");
 });
 
+router.get("/top", middleware.isLoggedIn, function(req,res){
+    var rank = { like_count: 1};
+    Meme.find({},function(error, allMeme){
+        if(error){
+            console.log("Error!");
+        } else {
+            function compare(a, b) {
+                const likeA = a.like_count;
+                const likeB = b.like_count;
+
+                let comparison = 0;
+                if (likeA > likeB) {
+                  comparison = -1;
+                } else if (likeA < likeB) {
+                  comparison = 1;
+                }
+                return comparison;
+            }
+            allMeme.sort(compare);
+            res.render("memes/top",{Meme:allMeme});
+        }
+    });
+});
+
 router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res){
     let n_name = req.body.name;
     let n_image = req.file.filename;

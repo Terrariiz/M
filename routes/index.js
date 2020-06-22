@@ -32,7 +32,7 @@ router.get("/",function(req,res){
         } else {
             res.render("landing",{Meme:allMeme});
         }
-    })
+    });
 });
 
 router.get("/login",function(req,res){
