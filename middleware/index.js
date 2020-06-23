@@ -1,5 +1,6 @@
 const Meme = require("../models/meme");
 const Comment = require("../models/comment");
+const User = require("../models/user");
 
 let middlewareObj = {};
 
@@ -7,13 +8,12 @@ middlewareObj.checkMemeOwnership = function(req, res, next){
     if(req.isAuthenticated()){
         Meme.findById(req.params.id, function(err, foundMeme){
             if(err){
+                console.log(err);
                 res.redirect("back");
-            }
-            else{
+            } else {
                 if(foundMeme.author.id.equals(req.user.id)){
                     next();
-                } 
-                else{
+                } else {
                     res.redirect("back");
                 }
             }

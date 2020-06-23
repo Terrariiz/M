@@ -68,11 +68,11 @@ router.get("/", function(req,res){
     res.render("memes/index");
 });
 
-router.get("/top", middleware.isLoggedIn, function(req,res){
+router.get("/toprank", middleware.isLoggedIn, function(req,res){
     var rank = { like_count: 1};
     Meme.find({},function(error, allMeme){
         if(error){
-            console.log("Error!");
+            console.log(error);
         } else {
             function compare(a, b) {
                 const likeA = a.like_count;
