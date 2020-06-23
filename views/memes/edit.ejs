@@ -1,5 +1,5 @@
 <%- include("../partials/header") %>
-<div class="container jumbotron" style="width:55%;margin:25px auto;">
+<div class="container col-md-6 jumbotron" style="margin:25px auto;">
     <h3 style="text-align: center;">Edit</h3><br>
     <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid" onclick="document.getElementById('modal01').style.display='block'"></center>
     <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
@@ -17,7 +17,7 @@
             <label for="memeDesc">Description</label>
             <input type="text" class="form-control" name="meme[desc]" value="<%= meme.desc %>">
         </div><br>
-        <center><button class="btn btn-outline-primary">Edit</button></center>
+        <center><button class="btn btn-warning">Edit</button></center>
   </form>
 </div>
 <%- include("../partials/footer") %>
