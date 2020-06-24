@@ -1,0 +1,14 @@
+<%- include("partials/header") %>
+<div class="container" style="margin:25px auto;">
+    <h1>Log</h1>
+    <div class="row" style="display:flex; flex-wrap:wrap;">
+    <% Log.forEach(function(log){ %>
+        <div class = "container">
+            <h5><%= log.text %></h5>
+            <h6><%= log.date %></h6>
+            <br>
+        </div>
+    <% }); %>
+    </div>
+</div>
+<%- include("partials/footer") %>

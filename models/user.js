@@ -6,6 +6,7 @@ let UserSchema = new mongoose.Schema({
     email: { type:String },
     image: { type:String },
     name: { type:String },
+    type: { type:String},
     password: { type:String },
 });
 

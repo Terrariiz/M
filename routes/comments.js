@@ -2,6 +2,7 @@ const   express = require('express'),
         router = express.Router({mergeParams: true}),
         Meme = require('../models/meme'),
         Comment = require('../models/comment'),
+        Log = require("../models/log"),
         middleware = require('../middleware');
 
 router.get('/new', middleware.isLoggedIn, function(req,res){
@@ -24,6 +25,14 @@ router.post('/', middleware.isLoggedIn, function(req,res){
                 if(err){
                     console.log(err);
                 } else {
+                    var date = Date();
+                    Log.create(new Log({text: req.user.username + " has comment meme(comment id:"+ comment.id + ")", date: date}), function(err,log){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log(log);
+                        }
+                    });
                     comment.author.id = req.user._id;
                     comment.author.username = req.user.username;
                     comment.save();
@@ -51,16 +60,32 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req,res){
         if(err){
             res.redirect('back');
         } else {
+            var date = Date();
+            Log.create(new Log({text: req.user.username + " has edit comment (comment id:"+ updatedComment.id + ")", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }
+            });
             res.redirect('/edumeme/meme/' + req.params.id);
         }
     });
 });
 
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res){
-    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err, select){
         if(err){
             res.redirect('back'); 
         } else {
+            var date = Date();
+            Log.create(new Log({text: req.user.username + " has delete comment (comment id:"+ select.id + ")", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }
+            });
             res.redirect('/edumeme/meme/' + req.params.id);
         }
     });

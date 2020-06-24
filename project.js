@@ -9,6 +9,7 @@ const   express = require("express"),
         methodOverride = require("method-override"),
         User = require("./models/user"),
         Meme = require("./models/meme"),
+        Log = require("./models/log"),
         memeRoutes = require("./routes/meme"),
         indexRoutes = require("./routes/index"),
         commentsRoutes = require("./routes/comments");

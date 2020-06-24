@@ -6,6 +6,7 @@ const   express = require('express'),
         passport = require('passport'),
         Meme = require("../models/meme"),
         User = require('../models/user'),
+        Log = require("../models/log"),
         middleware = require('../middleware');
 
 const storage = multer.diskStorage({
@@ -35,6 +36,16 @@ router.get("/",function(req,res){
     });
 });
 
+router.get("/log",function(req,res){
+    Log.find({},function(error, allLog){
+        if(error){
+            console.log("Error!");
+        } else {
+            res.render("log",{Log:allLog});
+        }
+    });
+});
+
 router.get("/login",function(req,res){
     res.render("login");
 });
@@ -60,13 +71,21 @@ router.get("/signup",function(req,res){
 });
 
 router.post("/signup", function(req,res){
-    User.register(new User({username: req.body.username, email: req.body.email, image:"default.jpg", name: req.body.name}), req.body.password, function(err, user){
+    User.register(new User({username: req.body.username, email: req.body.email, image:"default.jpg", name: req.body.name, type: "user"}), req.body.password, function(err, user){
         if(err){
             console.log(err);
             req.flash("failure","Username has already use");
             return res.render("signup");
         }
         passport.authenticate("local")(req,res,function(){
+            var date = Date();
+            Log.create(new Log({text: req.body.username + " has register", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }                
+            });
             console.log("New account created");
             req.flash('success','Welcome , ' + user.username);
             res.redirect("/edumeme");
@@ -127,6 +146,14 @@ router.put("/profile/:id", middleware.isLoggedIn, upload.single("image"), functi
         if(err){
             console.log(err);
         } else {
+            var date = Date();
+            Log.create(new Log({text: updateUser.username + " has edit profile", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }                
+            });
             console.log(updateUser);
             res.redirect('/edumeme/profile/' + req.params.id);
         }

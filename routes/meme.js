@@ -5,6 +5,7 @@ const   express = require('express'),
         fs = require("fs"),
         Meme = require("../models/meme"),
         Comments = require("../models/comment"),
+        Log = require("../models/log"),
         middleware = require('../middleware');
 
 const storage = multer.diskStorage({
@@ -106,6 +107,14 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(req,res
         if(error){
             console.log(error);
         } else {
+            var date = Date();
+            Log.create(new Log({text: req.user.username + " has add meme (id: " + newMeme.id + ")", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }                
+            });
             console.log(newMeme);
             res.redirect("/edumeme");
         }
@@ -145,6 +154,14 @@ router.put("/:id", middleware.checkMemeOwnership, function(req,res){
         if(err){
             res.redirect("/edumeme");
         } else {
+            var date = Date();
+            Log.create(new Log({text: req.user.username + " has edit meme (id: " + updatedMeme.id + ")", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }                
+            });
             res.redirect('/edumeme/meme/' + req.params.id);
         }
     });
@@ -168,6 +185,14 @@ router.delete("/:id", middleware.checkMemeOwnership, function(req,res){
                 Comments.findByIdAndRemove(element, function(err, comment){
                     console.log("Meme deleted");
                 });
+            });
+            var date = Date();
+            Log.create(new Log({text: req.user.username + " has delete meme (id: " + select.id + ")", date: date}), function(err,log){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(log);
+                }                
             });
             res.redirect("/edumeme");
         }
