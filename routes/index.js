@@ -66,6 +66,10 @@ router.get("/logout",function(req,res){
     res.redirect("/edumeme");
 });
 
+router.get("/terms", function(req,res){
+    res.render("terms");
+})
+
 router.get("/signup",function(req,res){
     res.render("signup");
 });
