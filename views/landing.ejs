@@ -6,7 +6,7 @@
     </div>
     <div class="row" style="display:flex; flex-wrap:wrap;">
     <% Meme.forEach(function(meme){ %>
-        <a class="btn btn-light col-md-3 col-sm-6" href="/edumeme/meme/<%= meme._id %>">
+        <a class="btn btn-light col-lg-3 col-md-4 col-sm-6" href="/edumeme/meme/<%= meme._id %>">
             <div class="img-thumbnail">
                 <p><strong><%= meme.author.username %></strong></p>
                 <img src=<%= "../uploads/" + meme.image %> class="img-fluid" style="margin: auto; width: 250px; height: 250px;">
