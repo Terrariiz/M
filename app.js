@@ -49,6 +49,8 @@ app.use("/edumeme", indexRoutes);
 app.use("/edumeme/meme", memeRoutes);
 app.use("/edumeme/meme/:id/comments", commentsRoutes);
 
-app.listen(process.env.PORT , function(req,res){
+const port = process.env.PORT || 3000;
+
+app.listen(port , function(req,res){
     console.log("Link Start!");
 });
