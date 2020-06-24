@@ -7,7 +7,7 @@
         <div class="w3-modal-content w3-animate-zoom">
             <center><img src=<%= '/uploads/'+ meme.image %> style="width:50%"></center>
         </div>
-    </div><br>
+    </div>
     <form action="/edumeme/meme/<%= meme._id %>?_method=PUT" method="POST">
         <div class="form-group">
             <label for="memeName">Meme name</label>
@@ -17,7 +17,7 @@
             <label for="memeDesc">Description</label>
             <input type="text" class="form-control" name="meme[desc]" value="<%= meme.desc %>">
         </div><br>
-        <center><button class="btn btn-warning">Confirm</button></center>
+        <center><button class="btn btn-warning">Edit</button></center>
   </form>
 </div>
 <%- include("../partials/footer") %>

@@ -26,7 +26,7 @@
         <% } %>
         <h1><%= meme.author.username %></h1>
         <h1><%= meme.name %></h1>
-        <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid"></center><br>
+        <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid"></center> 
         <p><%= meme.desc %></p>
     </div>
     <% if(currentUser) { %>
