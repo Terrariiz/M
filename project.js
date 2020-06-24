@@ -17,7 +17,7 @@ const   express = require("express"),
 const   app = express();
 
 mongoose.set("useUnifiedTopology", true);
-mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://Akemonai:HtRaeTR123456@projectweb2020-g6w39.mongodb.net/<dbname>?retryWrites=true&w=majority', {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 mongoose.set("useFindAndModify", false);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,6 +49,6 @@ app.use("/edumeme", indexRoutes);
 app.use("/edumeme/meme", memeRoutes);
 app.use("/edumeme/meme/:id/comments", commentsRoutes);
 
-app.listen(3000, function(req,res){
+app.listen(process.env.PORT , function(req,res){
     console.log("Link Start!");
 });
