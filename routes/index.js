@@ -83,7 +83,7 @@ router.post("/signup", function(req,res){
         }
         passport.authenticate("local")(req,res,function(){
             var date = Date();
-            Log.create(new Log({text: req.body.username + " has register", date: date}), function(err,log){
+            Log.create(new Log({text: req.body.username + " has register (id:" + user._id + ")", date: date}), function(err,log){
                 if(err){
                     console.log(err);
                 } else {
