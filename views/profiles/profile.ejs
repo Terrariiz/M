@@ -16,7 +16,7 @@
       <strong><h1><%= user.username %></h1></strong>
       <% if(currentUser && user._id.equals(currentUser._id)){ %>
         <% if(currentUser.type == "admin"){ %>
-            <a class="btn btn-primary" href="/edumeme/log">Web log</a>
+            <a class="btn btn-primary" href="/edumeme/log">Audit log</a>
         <% } %>
       <a class="btn btn-warning" href="/edumeme/profile/<%= currentUser._id %>/edit">
       <svg class="bi bi-pencil-square" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

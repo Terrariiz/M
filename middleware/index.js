@@ -11,7 +11,7 @@ middlewareObj.checkMemeOwnership = function(req, res, next){
                 console.log(err);
                 res.redirect("back");
             } else {
-                if(foundMeme.author.id.equals(req.user.id)){
+                if(foundMeme.author.id.equals(req.user.id) || (req.user.type == "admin")){
                     next();
                 } else {
                     res.redirect("back");
@@ -30,7 +30,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
             if(err){
                 res.redirect("back");
             } else {
-                if(foundComment.author.id.equals(req.user._id)) {
+                if(foundComment.author.id.equals(req.user._id) || (req.user.type == "admin")) {
                     next();
                 } else {
                     res.redirect('back');

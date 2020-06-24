@@ -2,6 +2,7 @@
 <div class="container col-md-6 jumbotron" style="margin:25px auto;">
     <div>
         <h5>category: <%= meme.category %></h5>
+        <% if (currentUser) {%>
         <% if( (currentUser && meme.author.id.equals(currentUser._id)) || (currentUser.type == "admin") ){ %>
         <div class="row" style="float: right;">
             <div class="w3-dropdown-hover" style="background-color: initial;">
@@ -23,9 +24,9 @@
                 </div>
             </div>
         </div>
-        <% } %>
-        <h1><%= meme.author.username %></h1>
-        <h1><%= meme.name %></h1>
+        <% }} %>
+        <h1><strong><%= meme.author.username %></strong></h1>
+        <h2><%= meme.name %></h2>
         <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid"></center><br>
         <p><%= meme.desc %></p>
     </div>
@@ -50,6 +51,7 @@
         <% meme.comments.forEach(function(comment){ %>
         <div class="row">            
             <p><strong><a href="/edumeme/profile/<%=comment.author.id%>"><%= comment.author.username %></a></strong> - <%= comment.text %></p>
+            <% if(currentUser) {%>
             <% if( (currentUser && comment.author.id.equals(currentUser._id)) || (currentUser.type == "admin") ){ %>
                 <div class="w3-dropdown-hover" style="background-color: initial;">
                     <svg class="bi bi-three-dots-vertical" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +71,7 @@
                         </form>                          
                     </div>
                 </div>
-            <% } %>    
+            <% }} %>    
         </div>
         <% }) %>
     </div>
