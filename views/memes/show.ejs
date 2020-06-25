@@ -25,7 +25,7 @@
             </div>
         </div>
         <% }} %>
-        <h1><strong><%= meme.author.username %></strong></h1>
+        <h1><strong><a href="/edumeme/profile/<%=meme.author.id%>"><%= meme.author.username %></a></strong></h1>
         <h2><%= meme.name %></h2>
         <center><img src=<%= '/uploads/'+ meme.image %> class="img-fluid"></center><br>
         <p><%= meme.desc %></p>
