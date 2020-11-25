@@ -5,15 +5,12 @@
                 <div class="row">
                     <div class="col-12">
 						<nav class="navbar navbar-expand-md navbar-light">
-							<a class="navbar-brand" href="/home" target="_blank"><img src="../../assets/images/kmutt.png" alt="sci_kmutt"></a>
+							<a class="navbar-brand" href="/home" ><img src="../../assets/images/kmutt.png" alt="sci_kmutt"></a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
 							<div class="collapse navbar-collapse" id="navbarSupportedContent">
 								<ul class="navbar-nav ml-auto py-4 py-md-0">
-									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-5 active">
-										<router-link class="nav-link" to="/home">Home</router-link>
-									</li>
 									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-5">
 										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
 										<div class="dropdown-menu">
@@ -36,6 +33,12 @@
 											<router-link class="dropdown-item" to="/home/curriculum">Curriculum</router-link>
 											<router-link class="dropdown-item" to="/home/document">Document</router-link>
 											<router-link class="dropdown-item" to="/home/keyword">Keyword</router-link>
+										</div>
+									</li>									
+									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-5">
+										<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Activity</a>
+										<div class="dropdown-menu">
+											<router-link class="dropdown-item" to="/student/submitThesic">Submit Tsic</router-link>
 										</div>
 									</li>
 									<li class=" pl-4 pl-md-0 ml-0 ml-md-5 active">

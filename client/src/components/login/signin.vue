@@ -17,14 +17,14 @@
 
                         <div class="wrap-input100 validate-input">
                             <v-text-field
-                            class="input100"
-                            v-model="username"
-                            v-validate="'required|max:20'"
-                            :counter="20"
-                            :error-messages="errors.collect('username')"
-                            label="username"
-                            data-vv-name="username"
-                            required
+                                class="input100"
+                                v-model="username"
+                                v-validate="'required|max:20'"
+                                :counter="20"
+                                :error-messages="errors.collect('username')"
+                                label="username"
+                                data-vv-name="username"
+                                required
                             ></v-text-field>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
@@ -34,17 +34,17 @@
 
                         <div class="wrap-input100 validate-input">
                             <v-text-field
-                            class="input100"
-                            v-model="password"
-                            :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                            :type="show1 ? 'text' : 'password'"
-                            v-validate="'required'"
-                            :error-messages="errors.collect('password')"
-                            label="password"
-                            data-vv-name="password"
-                            v-on:keyup.enter="sign_in"
-                            required
-                            @click:append="show1 = !show1"
+                                class="input100"
+                                v-model="password"
+                                :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                                :type="show1 ? 'text' : 'password'"
+                                v-validate="'required'"
+                                :error-messages="errors.collect('password')"
+                                label="password"
+                                data-vv-name="password"
+                                v-on:keyup.enter="sign_in"
+                                required
+                                @click:append="show1 = !show1"
                             ></v-text-field>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
@@ -58,10 +58,9 @@
                                 <v-btn class="btn login100-form-btn" @click="clear">clear</v-btn>
                             </div>
                         </div>
-
                     </form>
                 </div>
-		    </div>
+		        </div>
         </div>
     </div>
 </template>
@@ -134,9 +133,18 @@ export default {
 
     methods: {
         async sign_in () {
-          this.$loading(true);
+          this.$loading(true)
 
             if( !this.username || !this.password){
+                this.valid = false
+            }
+
+            if( this.username > 30){
+                this.valid = false
+            }
+
+            if( !this.valid ){
+                this.$loading(false)
                 this.$validator.validateAll()
             }else{
                 const formData = {
@@ -157,22 +165,26 @@ export default {
                                 'Content-type': 'application/x-www-form-urlencoded'
                             }})
                             .then(res => {
+                                this.$loading(false)
                                 if(res.data.success){
                                     localStorage.setItem('tsic_token' , res.data.data.token)
                                     this.$router.push('/profile')
-                                    this.$loading(false);
                                 }else{
-                                    this.$loading(false);
                                     window.alert(res.data.message)
+                                    this.username = ''
+                                    this.password = ''
                                 }
                             })
                             .catch(err => {
+                                this.$loading(false);
                                 console.log(err)
                             })
                 }catch (error) {
+                    this.$loading(false)
                     console.error(error)
                 }
             }
+            this.valid = true;
         },
 
         clear () {

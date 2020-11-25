@@ -155,7 +155,10 @@ const routes = [
   {
     path: '/student/submitThesic',
     name: 'submitThesic',
-    component: submitThesic
+    component: submitThesic,
+    meta: {
+      requiresStudentAuth: true
+    }
   },
   {
     path: '/student_profile/my_profile',

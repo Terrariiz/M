@@ -107,7 +107,7 @@ export default {
     async beforeCreate() {
         const token = localStorage.getItem("tsic_token")
         if(token){
-            window.alert("please sing out and sign in again!!")
+            window.alert("please sign out and sign in again!!")
             this.$router.push("/home/user_profile")
         }
     },
@@ -176,13 +176,11 @@ export default {
                                 this.$loading(false)
                                 if(res.data.success){
                                     localStorage.setItem('tsic_std_token' , res.data.data.token)
-                                    this.$router.push('/student_profile')
-						
+                                    this.$router.push('/student_profile')						
                                 }else{
                                     window.alert(res.data.message)
                                     this.username = ''
-                                    this.password = ''
-                                    
+                                    this.password = ''                                                                        
                                 }
                             })
                             .catch(err => {

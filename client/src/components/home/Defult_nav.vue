@@ -10,22 +10,22 @@
             </button>  
             <nav id="site-nav" role="navigation">
               <div class="col">
-                <h4>News</h4>
                 <ul>
-                  <li><a href="/home">Home</a></li>
-                </ul>            
+                  <h2><a  href="/home">Home</a></h2>
+                </ul>  
+                <h7>News</h7>
               </div>
               <div class="col">
-                <h4>For Staff</h4>
                 <ul>
-                  <li><router-link to="/signin">Sign in</router-link></li>
+                  <h2><router-link to="/signin">Sign in</router-link></h2>
                 </ul> 
+                <h7>For Staff</h7>
               </div>
               <div class="col">
-                <h4>For Student</h4>
                 <ul>
-                  <li><router-link to="/student_signin">Sign in</router-link></li>
+                  <h2><router-link to="/student_signin">Sign in</router-link></h2>
                 </ul> 
+                <h7>For Student</h7>                
               </div>
               <div class="col">
               </div>
@@ -337,7 +337,8 @@ body {
   } 
 }
 
-#site-nav h4 {
+#site-nav h7 {
+  color: #9b9b9b;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -347,19 +348,19 @@ body {
   margin-top: 1em;
 }
 
-#site-nav li {
+#site-nav h7 {
   margin-bottom: 0.3125em;
 }
 
-#site-nav li a {
-  color: #b4b9ba;
+#site-nav h2 a {
+  color:#9b9b9b;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-#site-nav li a:hover,
-#site-nav li a:focus {
-  color: #686d6e;
+#site-nav h2 a:hover,
+#site-nav h2 a:focus {
+  color: #000000;
 }
 
 #site-nav .social {
@@ -367,14 +368,14 @@ body {
   overflow: hidden;
 }
 
-#site-nav .social li {
+#site-nav .social h2 {
   float: left;
   margin: 0 0.3125em;
   width: 32px;
   height: 32px;
 }
 
-#site-nav .social li svg {
+#site-nav .social h2 svg {
   display: block;
   fill: #b4b9ba;
   width: 100%;
@@ -382,7 +383,7 @@ body {
   transition: fill 0.3s ease;
 }
 
-#site-nav .social li:hover svg {
+#site-nav .social h2:hover svg {
   fill: #686d6e;
 }
 
